@@ -21,13 +21,25 @@ public class DRAWING_PAPER {
 
     static Scanner entrada = new Scanner(System.in);
     static boolean condicion = true;
-
+    
     static ArrayList<String> lista = new ArrayList<>();
-
+    static Cola CLIENTE =new Cola();
+    
+    static int id =0;
+     static String  nombre_cliente="";
+                    static int img_color =0;
+                   static  int img_bw =0;
+                  static   String Cl="";
+    
+    
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        //CARGAS();
+        CARGAS();
+        
+        
          //MENU();
+         
+         /**
          Cola cliente = new Cola();
          cliente.insertar("Cliente1", 0, "ISAI", 2, 3);
          cliente.insertar("Cliente2", 1, "ISAI", 2, 3);
@@ -35,92 +47,32 @@ public class DRAWING_PAPER {
          cliente.insertar("Cliente4", 3, "ISAI", 2, 3);
          cliente.recorrer();
          
-        /**
-         * xCODIGO PARA PROBAR LISTA SIMPLE
-         *
-         * ListaS lista = new ListaS();
-         *
-         * System.out.println("<<-- Ejemplo de lista simple -->>\n");
-         *
-         * // Agregar al final de la lista lista.agregarAlFinal(12);
-         * lista.agregarAlFinal(15); lista.agregarAlFinal(9); // Agregar in
-         * inicio de la lista lista.agregarAlInicio(41);
-         * lista.agregarAlInicio(6);
-         *
-         * System.out.println("<<-- Lista -->>"); lista.listar();
-         *
-         * System.out.println("\n\n<<-- Tamaño -->");
-         * System.out.println(lista.getTamanio());
-         *
-         * System.out.println("\n<<-- Obtener el valor del nodo en la posicion 3 -->>");
-         * System.out.println(lista.getValor(3));
-         *
-         * System.out.println("\nInsrta un nodo con valor 16 despues del 15");
-         * lista.insertarPorReferencia(15, 16); lista.listar();
-         * System.out.print(" | Tamaño: ");
-         * System.out.println(lista.getTamanio());
-         *
-         * System.out.println("\n\nInsrta un nodo con valor 44 en la posición
-         * 3"); lista.insrtarPorPosicion(3, 44); lista.listar();
-         * System.out.print(" | Tamaño: ");
-         * System.out.println(lista.getTamanio());
-         *
-         * System.out.println("\nActualiza el valor 12 del tercer nodo por 13");
-         * lista.editarPorReferencia(12, 13); lista.listar(); System.out.print("
-         * | Tamaño: "); System.out.println(lista.getTamanio());
-         *
-         * System.out.println("\nActualiza el valor nodo en la posición 0 por
-         * 17"); lista.editarPorPosicion(0, 17); lista.listar();
-         * System.out.print(" | Tamaño: ");
-         * System.out.println(lista.getTamanio());
-         *
-         * System.out.println("\nElimina el nodo con el valor 41");
-         * lista.removerPorReferencia(41); lista.listar(); System.out.print(" |
-         * Tamaño: "); System.out.println(lista.getTamanio());
-         *
-         * System.out.println("\nElimina el nodo en la posición 4");
-         * lista.removerPorPosicion(4); lista.listar(); System.out.print(" |
-         * Tamaño: "); System.out.println(lista.getTamanio());
-         *
-         * System.out.println("\nConsulta si existe el valor 30");
-         * System.out.println(lista.buscar(30));
-         *
-         * System.out.println("\nConsulta la posicion del valor 9");
-         * System.out.println(lista.getPosicion(9));
-         *
-         * System.out.println("\nElimina la lista"); lista.eliminar();
-         *
-         * System.out.println("\nConsulta si la lista está vacia");
-         * System.out.println(lista.esVacia());
-         *
-         * System.out.println("\n\n<<-- Fin de ejemplo lista simple -->>");
-         *
-         *
-         */
-
-        /**
-         *
-         * CÓDIGO PARA EVALUAR LA COLA
-         *
-         * Cola cola1=new Cola(); cola1.insertar(46); cola1.insertar(12);
-         * cola1.insertar(87); cola1.insertar(125); cola1.insertar(30);
-         * cola1.extraer(); cola1.estaVacia(); cola1.contar();
-         * System.out.println(cola1.toString());
-        *
-         */
-        /**
-         *
-         * CODIGO PARA EVALUAR LA PILA
-         *
-         *
-         * //CREANDO LA PILA Pila p = new Pila();
-         *
-         * //OPERACIONES CON PILA p.push(2); p.push(8); p.push(1);
-         *
-         * p.peek(); p.cima(); p.pop(); p.peek(); p.pop(); p.cima(); p.pop();
-         * p.peek();
-          *
-         */
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        ListaS lista = new ListaS();
+        int  a=7;
+        for (int i = 0; i < a; i++) {
+            lista.agregar(i);
+        }
+        
+         lista.recorrer();
+         
+         System.out.println("++++++++++++++++++++++++");
+         Pila p = new Pila();
+         p.push(1, 0);
+         p.push(5, 3);
+         p.push(4, 2);
+         p.peek();
+         
+         
+         System.out.println("====================");
+         Clientes_A atendidos = new Clientes_A();
+         atendidos.agregar("ISAI","VENTANILLA 1", 5, 48);
+         atendidos.agregar("I","VENTANILLA 7", 5, 48);
+         atendidos.agregar("SA","VENTANILLA 4", 5, 48);
+         atendidos.agregar("I","VENTANILLA 6", 5, 48);
+         atendidos.recorrer();**/
+         
+         
     }
 
     static void MENU() {
@@ -174,34 +126,61 @@ public class DRAWING_PAPER {
     }
 
     static void CARGAS() {
-
+            //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO
         JSONParser parser = new JSONParser();
 
         try {
-            System.out.println("ESTOY LEYENDO EL ARCHIVO");
+            System.out.println("***************LEYENDO CONTENIDO DEL ARCHIVO***************");
             Object obj = parser.parse(new FileReader("Entrada.json"));
             JSONObject data = (JSONObject) obj;
-            System.out.println("JSON LEIDO: " + data);
+            //System.out.println("JSON LEIDO: " + data);
 
             data.keySet().forEach(keyStr
                     -> {
-
-                System.out.println("key:" + keyStr);
+                //ENTENDER FUNCIONAMIENTO DE KEYS
+                //System.out.println("key:" + keyStr);
                 if (((JSONObject) data.get(keyStr)).keySet() != null) {
                     ((JSONObject) data.get(keyStr)).keySet().forEach(keyStr2
                             -> {
-
+                            
+                            Cl=(String) keyStr;
                         Object keyvalue2 = ((JSONObject) data.get(keyStr)).get(keyStr2);
-                        System.out.println("          key:" + keyStr2 + "   value:" + keyvalue2);
-                        lista.add((String) keyvalue2);
+                        
+                        if(keyStr2.equals("id_cliente")){
+                            id=Integer.parseInt((String) keyvalue2);
+                        }else {
+                            if (keyStr2.equals("nombre_cliente")) {
+                                
+                                nombre_cliente=(String) keyvalue2;
+                            } else {
+                                
+                                if (keyStr2.equals("img_color")) {
+                                    
+                                    img_color=Integer.parseInt((String) keyvalue2);
+                                } else {
+                                    
+                                    if (keyStr2.equals("img_bw")) {
+                                        
+                                        img_bw=Integer.parseInt((String) keyvalue2);
+                                        
+                                    } else {
+                                        
+                                    }
+                                }
+                            }
+                            
+                        }
+                        //ENTENDER FUNCIONAMIENTO DE KEYS
+                        //System.out.println("          key:" + keyStr2 + "   value:" + keyvalue2);
+                        
+                        
                     }
                     );
                 }
+             CLIENTE.insertar(Cl, id, nombre_cliente, img_color, img_bw);
             });
-
-            for (String temp : lista) {
-                System.out.println(temp);
-            }
+               
+        CLIENTE.recorrer();
 
         } catch (FileNotFoundException e) {
         } catch (IOException e) {

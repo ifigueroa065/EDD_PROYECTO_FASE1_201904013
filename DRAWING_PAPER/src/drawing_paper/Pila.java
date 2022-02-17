@@ -16,12 +16,12 @@ public class Pila {
     	return (top==null);
     }
  
-    public void push (int valor){
+    public void push (int img_color, int img_bw){
     	NodoP nuevoNodo;
     	if(vacia())
-    		top = new NodoP(valor);
+    		top = new NodoP(img_color, img_bw);
     	else{
-    		nuevoNodo = new NodoP(valor);
+    		nuevoNodo = new NodoP(img_color, img_bw);
     		nuevoNodo.setProx(top);
     		top = nuevoNodo;	
     	}
@@ -32,7 +32,7 @@ public class Pila {
     	if(temp!=null){
     		System.out.println("La pila es: ");
     		while(temp!=null){
-    			System.out.println(temp.getValor());
+    			System.out.println("COLOR: "+ temp.getImg_color() + "   BW:"+ temp.getImg_bw());
     			temp= temp.getProx();
     		}
     	}
@@ -42,14 +42,14 @@ public class Pila {
     
     public void cima(){
     	if(!vacia())
-    		System.out.println("Cima: " + top.getValor());
+    		System.out.println("Cima: " + top.getImg_color());
     	else
     		System.out.println("La pila esta vacia");	
     }
     
     public void pop(){
     	if(!vacia()){
-    		System.out.println("Dato extraido "+top.getValor());
+    		System.out.println("Dato extraido "+top.getImg_color());
     		top = top.getProx();
     	}
     	else

@@ -1,10 +1,10 @@
 
 package drawing_paper;
 
-public class ListaS {
- 
-    
-    private NodoS inicio;
+//LISTA DE CLIENTES ATENDIDOS
+
+public class Clientes_A {
+    private Nodo_Clientes inicio;
     private int tamanio;
     
     public void Lista(){
@@ -20,9 +20,9 @@ public class ListaS {
         return tamanio;
     }
     
-    public void agregar(int valor){
+    public void agregar(String nombre, String ventanilla,int n_img,int pasos){
         // Define un nuevo nodo.
-        NodoS nuevo = new NodoS(valor);
+        Nodo_Clientes nuevo = new Nodo_Clientes(nombre, ventanilla, n_img, pasos);
         
         if (esVacia()) {
             
@@ -30,7 +30,7 @@ public class ListaS {
         
         } else{
             
-            NodoS aux = inicio;
+            Nodo_Clientes aux = inicio;
             
             while(aux.getSiguiente() != null){
                 aux = aux.getSiguiente();
@@ -42,9 +42,9 @@ public class ListaS {
         tamanio++;
     }
      
-    public void agregarAlInicio(int valor){
+    public void agregarAlInicio(String nombre, String ventanilla,int n_img,int pasos){
         // Define un nuevo nodo.
-        NodoS nuevo = new NodoS(valor);
+        Nodo_Clientes nuevo = new Nodo_Clientes(nombre, ventanilla, n_img, pasos);
         
         if (esVacia()) {
             
@@ -63,11 +63,14 @@ public class ListaS {
     //Metodo extraer dato
     public void recorrer() {
         int contador=0;
-        NodoS aux = this.inicio;
+        Nodo_Clientes aux = this.inicio;
         while (aux!=null) {        
             contador++;
             System.out.println("----------------------");
-            System.out.println("VENTANILLA:"+contador);
+            System.out.println("NOMBRE:" + aux.getNombre());
+            System.out.println("VENTANILLA: " + aux.getVentanilla());
+            System.out.println("CANTIDAD: " + aux.getN_img());
+            System.out.println("CANTIDAD DE PASOS:" + aux.getPasos());
             
             
             aux=aux.getSiguiente();
@@ -78,12 +81,7 @@ public class ListaS {
         
     }
     
-    
-    
-    
-    
-    
-    
+   
     /**
      * Elimina la lista
      */
@@ -93,5 +91,4 @@ public class ListaS {
         // Reinicia el contador de tamaño de la lista a 0.
         tamanio = 0;
     }
-   
 }
