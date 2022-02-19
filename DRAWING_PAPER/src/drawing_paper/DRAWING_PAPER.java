@@ -8,10 +8,7 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import org.json.simple.JSONArray;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -20,24 +17,30 @@ public class DRAWING_PAPER {
     //DECLARACIÓN DE VARIABLES GLOBALES
 
     static Scanner entrada = new Scanner(System.in);
+    static Scanner entrada2 = new Scanner(System.in);
     static boolean condicion = true;
     
-    static ArrayList<String> lista = new ArrayList<>();
+    
     static Cola CLIENTE =new Cola();
+    static ListTemp TEMPORAL =new ListTemp();
+    
+    
     
     static int id =0;
-     static String  nombre_cliente="";
-                    static int img_color =0;
-                   static  int img_bw =0;
-                  static   String Cl="";
+    static String  nombre_cliente="";
+    static int img_color =0;
+    static  int img_bw =0;
+    static   String Cl="";
     
     
     public static void main(String[] args) throws Exception {
-        // TODO code application logic here
-        CARGAS();
+        //code application logic here
         
         
-         //MENU();
+        
+        
+        
+         MENU();
          
          /**
          Cola cliente = new Cola();
@@ -47,6 +50,20 @@ public class DRAWING_PAPER {
          cliente.insertar("Cliente4", 3, "ISAI", 2, 3);
          cliente.recorrer();
          
+         
+          
+         
+          CARGAS();
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        ListaS lista = new ListaS();
+        int  a=4;
+        
+        for (int i = 0; i < a; i++) {
+            Pila_Img Imagenes=new Pila_Img();
+            lista.agregar(0,"",Imagenes,true);
+        }
+        
+         lista.recorrer();
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
         ListaS lista = new ListaS();
         int  a=7;
@@ -76,6 +93,8 @@ public class DRAWING_PAPER {
     }
 
     static void MENU() {
+        System.out.println("");
+        System.out.println("");
         System.out.println("____________________________________________________");
         System.out.println("");
         System.out.println("                  UDRAWING PAPER                    ");
@@ -84,21 +103,21 @@ public class DRAWING_PAPER {
             System.out.println("****************************************************");
             System.out.println("**                Elija una opción                **");
             System.out.println("****************************************************");
-            System.out.println("  -->1.CARGAS             ");
-            System.out.println("  -->2.EJECUTAR PASO          ");
-            System.out.println("  -->3.ESTADO EN MEMORIA DE LAS ESTRUCTURAS      ");
-            System.out.println("  -->4.REPORTES           ");
-            System.out.println("  -->5.ACERCA DE           ");
-            System.out.println("  -->6.SALIR              ");
+            System.out.println("  -->1. CARGAS             ");
+            System.out.println("  -->2. EJECUTAR PASO          ");
+            System.out.println("  -->3. ESTADO EN MEMORIA DE LAS ESTRUCTURAS      ");
+            System.out.println("  -->4. REPORTES           ");
+            System.out.println("  -->5. ACERCA DE           ");
+            System.out.println("  -->6. SALIR              ");
 
             switch (entrada.nextLine()) {
                 case "1":
-                    //MENU DE CARGAS();
+                    MENU_CARGAS();
                     break;
+                    
                 case "2":
                     //EJECUTANDO PASO
                     EJ_PASO();
-
                     break;
                 case "3":
                     //OP3
@@ -106,7 +125,7 @@ public class DRAWING_PAPER {
                     break;
 
                 case "4":
-                    MOSTRAR_REPORTES();
+                    MENU_REPORTES();
                     break;
                 case "5":
                     //DESCIFRAR
@@ -120,7 +139,7 @@ public class DRAWING_PAPER {
                     break;
 
                 default:
-                    System.out.println("--NO SELECCIONÓ UNA OPCIÓN VÁLIDA--");
+                    System.out.println("$$$$---NO SELECCIONÓ UNA OPCIÓN VÁLIDA---$$$$");
             }
         }
     }
@@ -131,7 +150,7 @@ public class DRAWING_PAPER {
 
         try {
             System.out.println("***************LEYENDO CONTENIDO DEL ARCHIVO***************");
-            Object obj = parser.parse(new FileReader("Entrada.json"));
+            Object obj = parser.parse(new FileReader("Entrada2.json"));
             JSONObject data = (JSONObject) obj;
             //System.out.println("JSON LEIDO: " + data);
 
@@ -177,11 +196,27 @@ public class DRAWING_PAPER {
                     }
                     );
                 }
-             CLIENTE.insertar(Cl, id, nombre_cliente, img_color, img_bw);
+             CLIENTE.insertar_ORDEN(Cl, id, nombre_cliente, img_color, img_bw);
             });
                
         CLIENTE.recorrer();
-
+        
+        System.out.println("**************************************DESENCOLAR---");
+        //CLIENTE.desencolar();
+        //CLIENTE.desencolar();
+        
+            System.out.println("");
+            System.out.println("");
+        
+        
+        CLIENTE.recorrer();
+         
+            System.out.println("%%%%%%%%%%% SUCESSFULLY %%%%%%%%%%% ");
+        
+        CLIENTE.GenerarImagen("grafo1", CLIENTE.GenerarDTO("RECEPCION"));
+        pressAnyKeyToContinue();
+        
+        
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
         } catch (ParseException e) {
@@ -190,19 +225,159 @@ public class DRAWING_PAPER {
     }
 
     static void EJ_PASO() {
+        
+        System.out.println("-------------- ESTOY EJECUTANDO UN PASO --------------");
+        CLIENTE.desencolar();
+        pressAnyKeyToContinue();
     }
 
     static void MOSTRAR_ESTADOS() {
+        System.out.println("-------------- ESTADOS DE ESTRUCTURAS --------------");
+        pressAnyKeyToContinue();
     }
 
     static void MOSTRAR_REPORTES() {
+        System.out.println("--------------         REPORTES        --------------");
+        pressAnyKeyToContinue();
     }
 
     static void DATOS() {
-
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        System.out.println("MARLON ISAI");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        
+        System.out.println("               DATOS DEL ESTUDIANTE               ");
+        System.out.println("__________________________________________________");
+        System.out.println("");
+        System.out.println("           MARLON ISAI FIGUEROA FARFÁN            ");
+        System.out.println("           CARNET : 201904013                     ");
+        System.out.println("           ESTRUCTURA DE DATOS - SECCIÓN B         ");
+        System.out.println("");
+         System.out.println("__________________________________________________");
+        
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        
+        pressAnyKeyToContinue();
     }
+    
+    static void MENU_CARGAS() {
+       
+        while (condicion == true) {
+            System.out.println("****************************************************");
+            System.out.println("**                Elija una opción                **");
+            System.out.println("****************************************************");
+            System.out.println("  -->1.CARGA MASIVA DE CLIENTES           ");
+            System.out.println("  -->2.CANTIDAD DE VENTANILLAS      ");
+            System.out.println("  -->0.Volver              ");
+            
+            switch (entrada.nextLine()) {
+                case "1":
+                    CARGAS();
+                    break;
+                case "2":
+                    //EJECUTANDO PASO
+                    System.out.println("----INGRESE EL # DE VENTANILLAS A CREAR");
+                    int numero = entrada2.nextInt();
+                    
+                    System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                    ListaS lista = new ListaS();
+                    
+                    for (int i = 0; i < numero; i++) {
+                        Pila_Img Imagenes=new Pila_Img();
+                        lista.agregar(0,"",Imagenes,true);
+                    }
 
+                     lista.recorrer();
+                     pressAnyKeyToContinue();
+                    break;
+                case "0":
+                    MENU();
+                    
+
+                default:
+                    System.out.println("$$$$---NO SELECCIONÓ UNA OPCIÓN VÁLIDA---$$$$");
+            }
+        }
+    }
+    
+    
+    static void MENU_REPORTES() {
+       
+        while (condicion == true) {
+            
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("     *************         REPORTES        *************      ");
+            System.out.println("");
+            System.out.println("______________________________________________________________");
+            System.out.println("");
+            System.out.println("**                      Elija una opción                    **");
+            System.out.println("");
+            System.out.println("______________________________________________________________");
+            System.out.println("");
+            System.out.println("  -->1. Top 5 de clientes con mayor cantidad de imágenes a color           ");
+            System.out.println("  -->2. Top 5 de clientes con menor cantidad de imágenes en blanco y negro      ");
+            System.out.println("  -->3. Información del cliente que más pasos estuvo en el sistema            ");
+            System.out.println("  -->4. Datos de un cliente en específico              ");
+            System.out.println("  -->0. Volver              ");
+            
+            
+            switch (entrada.nextLine()) {
+                case "1":
+                    CARGAS();
+                    break;
+                case "2":
+                    //EJECUTANDO PASO
+                    System.out.println("----INGRESE EL # DE VENTANILLAS A CREAR");
+                    int numero = entrada2.nextInt();
+                    
+                    System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                    ListaS lista = new ListaS();
+                    
+                    for (int i = 0; i < numero; i++) {
+                        Pila_Img Imagenes=new Pila_Img();
+                        lista.agregar(0,"",Imagenes,true);
+                    }
+
+                     lista.recorrer();
+                     pressAnyKeyToContinue();
+                    break;
+                case "3":
+                    CARGAS();
+                    break;
+                case "4":
+                    CARGAS();
+                    break;
+                case "0":
+                    MENU();
+                    
+
+                default:
+                    System.out.println("$$$$---NO SELECCIONÓ UNA OPCIÓN VÁLIDA---$$$$");
+            }
+        }
+    }
+    
+    static public void pressAnyKeyToContinue()
+{
+    String seguir;
+    Scanner teclado = new Scanner(System.in);
+    System.out.println("Press Enter key to continue...");
+    try
+    {
+        seguir = teclado.nextLine();
+    }
+    catch(Exception e)
+    {}
 }
+    
+    
+}
+
+
+

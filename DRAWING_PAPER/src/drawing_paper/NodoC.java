@@ -9,7 +9,7 @@ public class NodoC {
     private int img_color;
     private int img_bw;
 
-    private NodoC next;
+    NodoC next;
 
     //Constructor
     public NodoC(String Cliente, int id_cliente, String nombre_cliente, int img_color, int img_bw) {

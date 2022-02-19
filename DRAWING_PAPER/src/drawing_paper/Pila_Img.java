@@ -5,10 +5,10 @@ package drawing_paper;
  *
  * @author Usuario
  */
-public class Pila {
+public class Pila_Img {
     private NodoP top;
     
-    public Pila(){
+    public Pila_Img(){
     	top = null;
     }
     
@@ -16,12 +16,12 @@ public class Pila {
     	return (top==null);
     }
  
-    public void push (int img_color, int img_bw){
+    public void push (String img){
     	NodoP nuevoNodo;
     	if(vacia())
-    		top = new NodoP(img_color, img_bw);
+    		top = new NodoP(img);
     	else{
-    		nuevoNodo = new NodoP(img_color, img_bw);
+    		nuevoNodo = new NodoP(img);
     		nuevoNodo.setProx(top);
     		top = nuevoNodo;	
     	}
@@ -32,7 +32,7 @@ public class Pila {
     	if(temp!=null){
     		System.out.println("La pila es: ");
     		while(temp!=null){
-    			System.out.println("COLOR: "+ temp.getImg_color() + "   BW:"+ temp.getImg_bw());
+    			System.out.println("TIPO: "+ temp.getImg());
     			temp= temp.getProx();
     		}
     	}
@@ -42,14 +42,14 @@ public class Pila {
     
     public void cima(){
     	if(!vacia())
-    		System.out.println("Cima: " + top.getImg_color());
+    		System.out.println("Cima: " + top.getImg());
     	else
     		System.out.println("La pila esta vacia");	
     }
     
     public void pop(){
     	if(!vacia()){
-    		System.out.println("Dato extraido "+top.getImg_color());
+    		System.out.println("Dato extraido "+top.getImg());
     		top = top.getProx();
     	}
     	else

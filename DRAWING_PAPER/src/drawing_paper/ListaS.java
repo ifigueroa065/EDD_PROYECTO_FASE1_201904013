@@ -7,7 +7,7 @@ public class ListaS {
     private NodoS inicio;
     private int tamanio;
     
-    public void Lista(){
+    public void ListaS(){
         inicio = null;
         tamanio = 0;
     }
@@ -20,9 +20,9 @@ public class ListaS {
         return tamanio;
     }
     
-    public void agregar(int valor){
+    public void agregar(int id, String nombre_cliente,Pila_Img Imagenes, boolean status){
         // Define un nuevo nodo.
-        NodoS nuevo = new NodoS(valor);
+        NodoS nuevo = new NodoS(id, nombre_cliente, Imagenes, status);
         
         if (esVacia()) {
             
@@ -42,9 +42,9 @@ public class ListaS {
         tamanio++;
     }
      
-    public void agregarAlInicio(int valor){
+    public void agregarAlInicio(int id, String nombre_cliente,Pila_Img Imagenes, boolean status){
         // Define un nuevo nodo.
-        NodoS nuevo = new NodoS(valor);
+        NodoS nuevo = new NodoS(id, nombre_cliente, Imagenes, status);
         
         if (esVacia()) {
             
@@ -68,6 +68,10 @@ public class ListaS {
             contador++;
             System.out.println("----------------------");
             System.out.println("VENTANILLA:"+contador);
+            System.out.println("ID:"+ aux.getId());
+            System.out.println("NOMBRE:"+ aux.getNombre_cliente());
+            System.out.println("IMAGENES: "+ aux.getImagenes());
+            
             
             
             aux=aux.getSiguiente();
