@@ -5,13 +5,13 @@ package drawing_paper;
 public class Nodo_Clientes {
     
     private String nombre;
-    private String ventanilla;
+    private int ventanilla;
     private int n_img;
     private int pasos;
     
     private Nodo_Clientes siguiente;
     
-    public  Nodo_Clientes(String nombre, String ventanilla,int n_img,int pasos){
+    public  Nodo_Clientes(String nombre, int ventanilla,int n_img,int pasos){
         this.nombre=nombre;
         this.ventanilla=ventanilla;
         this.n_img=n_img;
@@ -24,7 +24,7 @@ public class Nodo_Clientes {
         return nombre;
     }
 
-    public String getVentanilla() {
+    public int getVentanilla() {
         return ventanilla;
     }
 
@@ -47,7 +47,7 @@ public class Nodo_Clientes {
         this.nombre = nombre;
     }
 
-    public void setVentanilla(String ventanilla) {
+    public void setVentanilla(int ventanilla) {
         this.ventanilla = ventanilla;
     }
 

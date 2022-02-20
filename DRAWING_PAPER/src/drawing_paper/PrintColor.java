@@ -6,7 +6,7 @@ public class PrintColor {
     
     
     //Declaración de atributos
-    private Nodo_PColor inicio;
+    Nodo_PColor inicio;
     private Nodo_PColor termino;
 
     //Constructor sin parametros
@@ -26,6 +26,7 @@ public class PrintColor {
         termino.setNext(i);
         termino = termino.getNext();
     }
+    
 
     //Metodo extraer dato
     public void recorrer() {
@@ -48,9 +49,9 @@ public class PrintColor {
         boolean cola = false;
         if (inicio == null & termino == null) {
             cola = true;
-            System.out.println("La cola esta vacia");
+           
         } else {
-            System.out.println("La cola no esta vacia");
+            
             cola = false;
         }
         return cola;
@@ -66,5 +67,17 @@ public class PrintColor {
         }
         System.out.println("Numero de datos en la cola: " + contador);
         return contador;
+    }
+    
+    public void desencolar(){
+        if (this.inicio!=null) {
+            Nodo_PColor eliminar=this.inicio;
+            this.inicio=this.inicio.getNext();
+            
+            eliminar.next=null;
+            if(this.inicio==null){
+                this.termino=null;
+            }
+        }
     }
 }

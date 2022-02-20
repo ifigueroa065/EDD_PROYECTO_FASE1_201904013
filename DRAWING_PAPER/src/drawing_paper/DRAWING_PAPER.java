@@ -4,6 +4,7 @@ package drawing_paper;
  *
  * @author ifigueroa065
  */
+import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -23,13 +24,20 @@ public class DRAWING_PAPER {
     
     static Cola CLIENTE =new Cola();
     static ListTemp TEMPORAL =new ListTemp();
+    static ListaS VENTANILLA = new ListaS();
+    static ListaE ESPERA = new ListaE();
+    static PrintColor IMP_COLOR =new PrintColor();
+    static PrintBw IMP_BW=new PrintBw();
+    static Clientes_A ATENDIDOS= new Clientes_A();
+    
+    static int stepColor=2;
     
     
-    
+    static int step=0;
     static int id =0;
     static String  nombre_cliente="";
     static int img_color =0;
-    static  int img_bw =0;
+    static int img_bw =0;
     static   String Cl="";
     
     
@@ -196,9 +204,9 @@ public class DRAWING_PAPER {
                     }
                     );
                 }
-             CLIENTE.insertar_ORDEN(Cl, id, nombre_cliente, img_color, img_bw);
+             CLIENTE.insertar(Cl, id, nombre_cliente, img_color, img_bw);
             });
-               
+        CLIENTE.ORDENAR();
         CLIENTE.recorrer();
         
         System.out.println("**************************************DESENCOLAR---");
@@ -213,6 +221,8 @@ public class DRAWING_PAPER {
          
             System.out.println("%%%%%%%%%%% SUCESSFULLY %%%%%%%%%%% ");
         
+        //TXT Generado para hacer el Grafo
+        //System.out.println(CLIENTE.GenerarDTO("RECEPCION"));
         CLIENTE.GenerarImagen("grafo1", CLIENTE.GenerarDTO("RECEPCION"));
         pressAnyKeyToContinue();
         
@@ -227,7 +237,184 @@ public class DRAWING_PAPER {
     static void EJ_PASO() {
         
         System.out.println("-------------- ESTOY EJECUTANDO UN PASO --------------");
-        CLIENTE.desencolar();
+        System.out.println("PASO"+step);
+        if (VENTANILLA.estaVacia()) {
+            System.out.println("________ DEBE GENERAR VENTANILLAS PRIMERO ________  ");
+        }else{
+            step++;
+            System.out.println("ESTOY DANDO UN PASO");
+            
+            //ATENDIDOS
+            NodoE solovino =ESPERA.inicio;
+            
+            
+            while(solovino!=null){
+                boolean negra=false;
+                boolean la_noche=false;
+                
+                Nodo_PBw tula= new Nodo_PBw();
+                
+                while (tula!=null) {   
+                     if (solovino.getId()==tula.getId_cliente()) {
+                         negra=true;
+                         break;
+                     }
+                    tula=tula.getNext();
+                }
+                Nodo_PColor tusa = new Nodo_PColor();
+                while (tusa!=null) {    
+                    if (solovino.getId()==tusa.getId_cliente()) {
+                         la_noche=true;
+                         break;
+                     }
+                    
+  
+                    tusa=tusa.getNext();
+                }
+                if (negra==false && la_noche==false) {
+                    ATENDIDOS.agregar(solovino.getNombre_cliente(), solovino.getVentanilla(),0 , step);
+                    //AQUI TENGO QUE ELIMINAR A SOLOVINO POR PARAMETRO XD 
+                    ESPERA.Eliminar(solovino.getId());
+                }
+                
+                solovino=solovino.getNext();
+            }
+            
+            
+            
+            //IMPRIMIENDO
+             if (IMP_BW.estaVacia()==false) {
+                NodoE esperita= ESPERA.inicio;
+                 while (esperita!=null) {                     
+                     if (esperita.getId()== IMP_BW.inicio.getId_cliente()) {
+                         //AQUI AGREGO A LA LISTA DE CLIENTES EN ESPERA
+                         esperita.getFOTITAS().push("Bw");
+                         
+                         
+                         //AQUI DESENCOLO DE IMP_BW
+                         IMP_BW.desencolar();
+                     
+                     }
+                  esperita=esperita.getNext();
+                 }
+            }
+             
+            if (IMP_COLOR.estaVacia()==false) {
+                NodoE esperita= ESPERA.inicio;
+                 while (esperita!=null) {                     
+                     if (esperita.getId()== IMP_COLOR.inicio.getId_cliente()) {
+                         
+                         stepColor--;
+                         if (stepColor==0) {
+                             //AQUI AGREGO A LA LISTA DE CLIENTES EN ESPERA
+                             esperita.getFOTITAS().push("Color");
+                             IMP_COLOR.desencolar();
+                             stepColor=2;
+                         }
+                         
+                         
+                         
+                     
+                     }
+                  esperita=esperita.getNext();
+                 }
+            } 
+            
+            
+            
+            //APILANDO
+            
+            NodoS gupi =VENTANILLA.inicio;
+            while (gupi!=null) {                
+                if (gupi.getStatus()==false) {
+                    if (gupi.getImg_Color()>0) {
+                        gupi.getImagenes().push("Color");
+                        gupi.setImg_Color(gupi.getImg_Color()-1);
+                    }else if(gupi.getImg_Bw()>0){
+                        
+                            gupi.getImagenes().push("Bw");
+                            gupi.setImg_Bw(gupi.getImg_Bw()-1);
+                        
+                        
+                    }else if (gupi.getImg_Color()==0 && gupi.getImg_Bw()==0){
+                         ESPERA.insertar(gupi.getId(),gupi.getNombre_cliente(),gupi.getNumero());
+                         
+                         NodoP alexa=gupi.getImagenes().CIMITA();
+                         while (alexa!=null) {                            
+                            
+                             if (alexa.getImg().equals("Color")) {
+                                 IMP_COLOR.insertar(gupi.getId());
+                                 gupi.getImagenes().pop();
+                             }else if (alexa.getImg().equals("Bw")){
+                                 IMP_BW.insertar(gupi.getId());
+                                 gupi.getImagenes().pop();
+                             }
+                             
+                         alexa=alexa.getProx();
+                        }
+                        gupi.setStatus(true);
+                        gupi.setNombre_cliente("");
+                        gupi.setId(0);
+                             
+                    }
+ 
+                }
+                gupi=gupi.getNext();
+            }
+            
+            
+            
+            
+            
+            
+            
+            //VERIFICANDO VENTANILLA DISPONIBLE
+            VENTANILLA.status();
+             
+                
+                NodoS nodito = VENTANILLA.inicio;
+                
+                while (nodito!=null) {  
+                    if (CLIENTE.estaVacia()) {
+                        break;
+                    }
+                    if (nodito.getStatus()) {
+                       
+                        nodito.setId(CLIENTE.inicio.getId_cliente());
+                        nodito.setNombre_cliente(CLIENTE.inicio.getNombre_cliente());
+                        nodito.setStatus(false);
+                        nodito.setImg_Color(CLIENTE.inicio.getImg_color());
+                        nodito.setImg_Bw(CLIENTE.inicio.getImg_bw());
+                        nodito.setPasito(step);
+                        
+                        
+                        CLIENTE.desencolar();
+                        break;
+                        
+                    }
+                    nodito=nodito.getNext();
+                }
+                
+                
+                
+                VENTANILLA.recorrer();
+                
+                System.out.println("________________________COLA DE COLOR______________");
+                IMP_COLOR.recorrer();
+                System.out.println("________________________COLA DE BW______________");
+                IMP_BW.recorrer();
+                
+                System.out.println("------------------LISTA DE ESPERA--------------");
+                ESPERA.recorrer();
+                
+                System.out.println("------------------LISTA DE ATENDIDOS--------------");
+                ATENDIDOS.recorrer();
+                
+                
+            
+            
+           
+        }
         pressAnyKeyToContinue();
     }
 
@@ -280,18 +467,22 @@ public class DRAWING_PAPER {
                     break;
                 case "2":
                     //EJECUTANDO PASO
-                    System.out.println("----INGRESE EL # DE VENTANILLAS A CREAR");
+                    System.out.println("------ INGRESE EL # DE VENTANILLAS A CREAR----");
                     int numero = entrada2.nextInt();
                     
                     System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-                    ListaS lista = new ListaS();
+                    
                     
                     for (int i = 0; i < numero; i++) {
-                        Pila_Img Imagenes=new Pila_Img();
-                        lista.agregar(0,"",Imagenes,true);
+                       
+                        VENTANILLA.insertar(i+1);
                     }
-
-                     lista.recorrer();
+                    
+                   
+                     VENTANILLA.recorrer();
+                     
+                     System.out.println("");
+                     System.out.println(" %%%% SE CREARON "+ numero + " VENTANILLAS SATISFACTORIAMENTE %%%%");
                      pressAnyKeyToContinue();
                     break;
                 case "0":
@@ -340,8 +531,8 @@ public class DRAWING_PAPER {
                     ListaS lista = new ListaS();
                     
                     for (int i = 0; i < numero; i++) {
-                        Pila_Img Imagenes=new Pila_Img();
-                        lista.agregar(0,"",Imagenes,true);
+                        
+                        lista.insertar(i+1);
                     }
 
                      lista.recorrer();

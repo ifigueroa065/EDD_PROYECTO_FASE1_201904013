@@ -20,7 +20,7 @@ public class Clientes_A {
         return tamanio;
     }
     
-    public void agregar(String nombre, String ventanilla,int n_img,int pasos){
+    public void agregar(String nombre, int ventanilla,int n_img,int pasos){
         // Define un nuevo nodo.
         Nodo_Clientes nuevo = new Nodo_Clientes(nombre, ventanilla, n_img, pasos);
         
@@ -42,7 +42,7 @@ public class Clientes_A {
         tamanio++;
     }
      
-    public void agregarAlInicio(String nombre, String ventanilla,int n_img,int pasos){
+    public void agregarAlInicio(String nombre, int ventanilla,int n_img,int pasos){
         // Define un nuevo nodo.
         Nodo_Clientes nuevo = new Nodo_Clientes(nombre, ventanilla, n_img, pasos);
         

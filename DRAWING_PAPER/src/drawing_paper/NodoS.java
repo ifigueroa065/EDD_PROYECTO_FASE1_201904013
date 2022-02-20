@@ -7,20 +7,27 @@ package drawing_paper;
 public class NodoS {
     
     ///agregando como atributo la pila
-    private Pila_Img Imagenes=new Pila_Img();
-    
+    Pila_Img Imagenes;
     private int id;
     private String nombre_cliente;
+    private int pasito;
     private boolean status;
+    private int img_Color;
+    private int img_Bw;
+    private int Numero;
     
-    private NodoS siguiente;
+    NodoS next;
     
-    public  NodoS(int id, String nombre_cliente,Pila_Img Imagenes, boolean status){
-        this.id = id;
-        this.nombre_cliente=nombre_cliente;
-        this.Imagenes=Imagenes;
-        this.status=status;
-        this.siguiente = null;
+    public  NodoS(){
+        this.id =0 ;
+        this.nombre_cliente="";
+        this.pasito=0;
+        this.img_Color=0;
+        this.img_Bw=0;
+        this.Numero=0;
+        Imagenes=new Pila_Img();
+        this.status=true;
+        this.next = null;
     }
     
     // MÉTODOS GETTER
@@ -33,19 +40,36 @@ public class NodoS {
         return nombre_cliente;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
     public Pila_Img getImagenes() {
         return Imagenes;
     }
+
+    public int getPasito() {
+        return pasito;
+    }
+
+
+    public int getImg_Color() {
+        return img_Color;
+    }
+
+    public int getImg_Bw() {
+        return img_Bw;
+    }
+
+    public int getNumero() {
+        return Numero;
+    }
         
     
 
     
-     public NodoS getSiguiente() {
-        return siguiente;
+     public NodoS getNext() {
+        return next;
     }
 
     
@@ -66,12 +90,33 @@ public class NodoS {
     public void setImagenes(Pila_Img Imagenes) {
         this.Imagenes = Imagenes;
     }
+
+    public void setPasito(int pasito) {
+        this.pasito = pasito;
+    }
+
+    public void setImg_Color(int img_Color) {
+        this.img_Color = img_Color;
+    }
+
+    public void setImg_Bw(int img_Bw) {
+        this.img_Bw = img_Bw;
+    }
+
+    public void setNumero(int Numero) {
+        this.Numero = Numero;
+    }
+
+    
+
+    
+    public void setNext(NodoS siguiente) {
+        this.next = siguiente;
+    }   
+    
+    public void InitPila(){
+        Imagenes=new Pila_Img();
+    }
     
     
-    
-    
-    
-    public void setSiguiente(NodoS siguiente) {
-        this.siguiente = siguiente;
-    }    
 }

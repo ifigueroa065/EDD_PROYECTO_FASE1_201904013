@@ -56,5 +56,45 @@ public class Pila_Img {
     		System.out.println("La pila esta vacia");
     }
     
+    public NodoP CIMITA() {
+    
+        return top;
+    }
+    
+    
+    public void CONTAR_COLOR(){
+    	NodoP temp = top;
+        int contador=0;
+    	if(temp!=null){
+    		System.out.println("La pila es: ");
+    		while(temp!=null){
+                    if (temp.getImg()== "Color") {
+                        contador++;
+                    }
+                    
+    			temp= temp.getProx();
+    		}
+    	}
+    	else
+    		System.out.println("PILA VACIA.");
+    }
+    
+    public int CONTAR_BW(){
+    	NodoP temp = top;
+        int contador=0;
+    	if(temp!=null){
+    		System.out.println("La pila es: ");
+    		while(temp!=null){
+                    if (temp.getImg()== "Color") {
+                        contador++;
+                    }
+                    
+    			temp= temp.getProx();
+    		}
+    	}
+    	else
+    		System.out.println("PILA VACIA.");
+        return contador;
+    }
     
 }

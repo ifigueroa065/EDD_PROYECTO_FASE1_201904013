@@ -4,10 +4,15 @@ package drawing_paper;
 public class Nodo_PColor {
 
     private int id_cliente;
-    private Nodo_PColor next;
+    Nodo_PColor next;
 
     public Nodo_PColor(int id_cliente) {
         this.id_cliente = id_cliente;
+        this.next = null;
+    }
+    
+    public Nodo_PColor() {
+        this.id_cliente = 0;
         this.next = null;
     }
 

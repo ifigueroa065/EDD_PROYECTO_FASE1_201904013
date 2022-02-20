@@ -3,6 +3,8 @@ package drawing_paper;
 //IMPLEMENTANDO LA COLA DE RECEPCIÓN
 
 import static drawing_paper.DRAWING_PAPER.TEMPORAL;
+import static drawing_paper.DRAWING_PAPER.VENTANILLA;
+import static drawing_paper.DRAWING_PAPER.step;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -14,7 +16,7 @@ public class Cola {
     
     
     //Declaración de atributos
-    private NodoC inicio;
+    NodoC inicio;
     private NodoC termino;
 
     //Constructor sin parametros
@@ -56,6 +58,19 @@ public class Cola {
         }
         
     }
+    public int  tamanio() {
+        int tam=0;
+        NodoC aux = this.inicio;
+        while (aux!=null) {            
+            tam++;
+            
+            aux=aux.getNext();
+            if(aux==this.inicio){
+                break;
+            }
+        }
+      return tam;
+    }
     
     public void desencolar(){
         if (this.inicio!=null) {
@@ -72,6 +87,8 @@ public class Cola {
             System.out.println("----INSERTANDO A LISTA TEMPORAL----");
             TEMPORAL.agregar(eliminar.getId_cliente(), eliminar.getNombre_cliente(), eliminar.getImg_color(), eliminar.getImg_bw());
             TEMPORAL.recorrer();
+            
+            //VENTANILLA.Atender(eliminar.getId_cliente(),eliminar.getNombre_cliente(), step);
             
             
             
@@ -148,61 +165,61 @@ public class Cola {
     
     
     public void ORDENAR(){
-        String auxCliente;
-        int auxId;
-        String auxnombre;
-        int auxcolor;
-        int auxbw;
-    
-        
-        NodoC aux = this.inicio;
-        NodoC auxsiguiente;
-        
-            System.out.println("---------------ESTOY ORDENANDO LA LISTA -------");
-            
-        while (aux!=null ) {            
-            auxsiguiente=aux.next;
-            
-            int num1 = aux.getId_cliente();
-            int num2 = aux.next.getId_cliente();
-            
-            if (num1 > num2 ) {
-                        //OBTENIENDO VALORES Y GUARDANDOLOS
-                        auxCliente = aux.getCliente();
-                        auxId = aux.getId_cliente();
-                        auxnombre=aux.getNombre_cliente();
-                        auxcolor= aux.getImg_color();
-                        auxbw= aux.getImg_bw();
+        //APLICANDO BUBBLE SORT
+        NodoC aux_i;
+        NodoC aux_j;
+        NodoC auxValor;
+        NodoC auxAnterior_i = null;
+        NodoC auxAnterior_j = null;
 
-                        //SETEANDO LA POSICION ACTUAL EL VALOR  DE LA POSICION SIGUIENTE
-                        aux.setCliente(aux.next.getCliente());
-                        aux.setId_cliente(aux.next.getId_cliente());
-                        aux.setNombre_cliente(aux.next.getNombre_cliente());
-                        aux.setImg_color(aux.next.getImg_color());
-                        aux.setImg_bw(aux.next.getImg_bw());
-                       
+        aux_i = this.inicio;
 
-                        //SETEANDO LA POSICION SIGUIENTE CON LA POSICION ACTUAL
-                        aux.next.setCliente(auxCliente);
-                        aux.next.setId_cliente(auxId);
-                        aux.next.setNombre_cliente(auxnombre);
-                        aux.next.setImg_color(auxcolor);
-                        aux.next.setImg_bw(auxbw);
-                        
-                       
-                        
+        System.out.println("---------------ESTOY ORDENANDO LA LISTA -------");
+
+        while (aux_i != null) {
+            aux_j = aux_i.next;
+            while (aux_j != null) {
+                if (aux_i.getId_cliente() > aux_j.getId_cliente()) {
+                    System.out.println("\tcambiar: " + aux_i.getId_cliente() + " y " + aux_j.getId_cliente() + "\n");
+
+                    auxValor = aux_i.next;
+
+                    if (auxValor.hashCode() != aux_j.hashCode()) {
+
+                        aux_i.next = aux_j.next;
+                        aux_j.next = auxValor;
+                        auxAnterior_j.next = aux_i;
+                    } else {
+
+                        aux_i.next = aux_j.next;
+                        aux_j.next = aux_i;
 
                     }
-            
-            aux=aux.getNext();
-            
-            
-            if(aux==this.inicio){
-                break;
+                    //intercambiar las posiciones de los nodos [i],[j]
+                    auxValor = aux_i;
+                    aux_i = aux_j;
+                    aux_j = auxValor;
+
+                    ///Al cambiar la posicion de un nodo el nodo anterior de [i] debe apuntar al nuevo [i]
+                    if (auxAnterior_i != null) {
+                        auxAnterior_i.next = aux_i;
+                    }
+
+                    //si cambiamos la posicion del primer nodo de la lista, debemos cambiar el nodo inicial.
+                    if (aux_j.hashCode() == inicio.hashCode()) {
+                        inicio = aux_i;
+                    }
+
+                }
+
+                auxAnterior_j = aux_j;
+                aux_j = aux_j.next;
+
             }
+            auxAnterior_i = aux_i;
+            aux_i = aux_i.next;
+
         }
-        
-        
     }
     
     

@@ -4,77 +4,46 @@ package drawing_paper;
 public class ListaS {
  
     
-    private NodoS inicio;
-    private int tamanio;
-    
-    public void ListaS(){
+    NodoS inicio;
+    private NodoS termino;
+
+    //Constructor sin parametros
+    public ListaS() {
         inicio = null;
-        tamanio = 0;
+        termino = null;
     }
     
-    public boolean esVacia(){
-        return inicio == null;
-    }
-    
-    public int getTamanio(){
-        return tamanio;
-    }
-    
-    public void agregar(int id, String nombre_cliente,Pila_Img Imagenes, boolean status){
-        // Define un nuevo nodo.
-        NodoS nuevo = new NodoS(id, nombre_cliente, Imagenes, status);
+    //Metodo insertar
+    public void insertar(int Numero) {
         
-        if (esVacia()) {
-            
-            inicio = nuevo;
-        
-        } else{
-            
-            NodoS aux = inicio;
-            
-            while(aux.getSiguiente() != null){
-                aux = aux.getSiguiente();
-            }
-            
-            aux.setSiguiente(nuevo);
+        NodoS nuevoNodo = new NodoS();
+        nuevoNodo.setNumero(Numero);
+        nuevoNodo.setNext(null);
+        if (inicio == null ) {
+            inicio = nuevoNodo;
+            termino = nuevoNodo;
+        }else{
+            termino.setNext(nuevoNodo);
         }
         
-        tamanio++;
+        termino = nuevoNodo;
     }
-     
-    public void agregarAlInicio(int id, String nombre_cliente,Pila_Img Imagenes, boolean status){
-        // Define un nuevo nodo.
-        NodoS nuevo = new NodoS(id, nombre_cliente, Imagenes, status);
-        
-        if (esVacia()) {
-            
-            inicio = nuevo;
-        
-        } else{
-            
-            nuevo.setSiguiente(inicio);
-            
-            inicio = nuevo;
-        }
-       
-        tamanio++;
-    }
-    
+
     //Metodo extraer dato
     public void recorrer() {
-        int contador=0;
+        System.out.println("");
         NodoS aux = this.inicio;
-        while (aux!=null) {        
+        int contador=0;
+        while (aux!=null) {            
             contador++;
-            System.out.println("----------------------");
-            System.out.println("VENTANILLA:"+contador);
+            System.out.println("---VENTANILLA"+contador);
             System.out.println("ID:"+ aux.getId());
-            System.out.println("NOMBRE:"+ aux.getNombre_cliente());
-            System.out.println("IMAGENES: "+ aux.getImagenes());
-            
-            
-            
-            aux=aux.getSiguiente();
+            System.out.println("NOMBRE: " + aux.getNombre_cliente());
+            System.out.println("ESTADO:"+ aux.getStatus());
+             System.out.println("IMG_Color:"+ aux.getImg_Color());
+              System.out.println("IMG_Bw:"+ aux.getImg_Bw());
+            System.out.println("----------------------");
+            aux=aux.getNext();
             if(aux==this.inicio){
                 break;
             }
@@ -82,20 +51,102 @@ public class ListaS {
         
     }
     
+    public boolean status() {
+        boolean res=true;
+        System.out.println("");
+        NodoS aux = this.inicio;
+        int contador=0;
+        while (aux!=null) {            
+            contador++;
+            if (aux.getStatus()==true) {
+                res=true;
+                System.out.println("VENTANILLA DISPONIBLE");
+            }else{
+                res=false;
+                System.out.println("VENTANILLA NO DISPONIBLE");
+            }
+            
+            aux=aux.getNext();
+            if(aux==this.inicio){
+                break;
+            }
+        }
+       return res;
+    }
     
+    public void desencolar(){
+        if (this.inicio!=null) {
+            NodoS eliminar=this.inicio;
+            this.inicio=this.inicio.getNext();
+            
+            System.out.println("----Estoy eliminando a---");
+            
+            
+            System.out.println("----INSERTANDO A LISTA TEMPORAL----");
+           
+            
+            
+            
+            eliminar.next=null;
+            if(this.inicio==null){
+                this.termino=null;
+            }
+        }
+    }
+
+    //Metodo para comprobar que la cola no esta vacia
+    public boolean estaVacia() {
+        boolean cola = false;
+        if (inicio == null & termino == null) {
+            cola = true;
+            
+        } else {
+            
+            cola = false;
+        }
+        return cola;
+    }
+
+    //Metodo para contar los elementos de la cola
+    public int  tamanio() {
+        int tam=0;
+        NodoS aux = this.inicio;
+        while (aux!=null) {            
+            tam++;
+            
+            aux=aux.getNext();
+            if(aux==this.inicio){
+                break;
+            }
+        }
+      return tam;
+    }
     
+    public void Atender(int id, String Nombre,int pasito){
+        NodoS auxiliar =this.inicio;
+        
+        if (auxiliar!=inicio) {
+            
+            while(auxiliar.getStatus()){
+            
+            }
+            auxiliar.setId(id);
+            auxiliar.setNombre_cliente(Nombre);
+            auxiliar.setPasito(pasito);
+            auxiliar.setStatus(false);
+            auxiliar.InitPila();
+            
+            auxiliar=auxiliar.getNext();
+        }else{
+            auxiliar.setId(id);
+            auxiliar.setNombre_cliente(Nombre);
+            auxiliar.setPasito(pasito);
+            auxiliar.setStatus(false);
+            auxiliar.InitPila();
+            
+            auxiliar=auxiliar.getNext();
+        }
     
-    
-    
-    
-    /**
-     * Elimina la lista
-     */
-    public void eliminar(){
-        // Elimina el valor y la referencia a los demas nodos.
-        inicio = null;
-        // Reinicia el contador de tamaño de la lista a 0.
-        tamanio = 0;
     }
    
 }

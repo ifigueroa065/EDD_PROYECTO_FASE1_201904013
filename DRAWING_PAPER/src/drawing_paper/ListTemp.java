@@ -5,7 +5,7 @@ package drawing_paper;
 
 public class ListTemp {
     
-    private NodoTemp inicio;
+    NodoTemp inicio;
     private NodoTemp terminoT;
     
     public ListTemp(){
@@ -93,6 +93,20 @@ public class ListTemp {
                 this.terminoT=null;
             }
         }
+    }
+    
+    public int  tamanio() {
+        int tam=0;
+        NodoTemp aux = this.inicio;
+        while (aux!=null) {            
+            tam++;
+            
+            aux=aux.getSiguiente();
+            if(aux==this.inicio){
+                break;
+            }
+        }
+      return tam;
     }
     
     

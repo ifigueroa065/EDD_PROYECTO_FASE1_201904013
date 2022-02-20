@@ -4,7 +4,7 @@ package drawing_paper;
 //IMPLEMENTANDO IMPRESORA A BLANCO & NEGRO
 public class PrintBw {
     //Declaración de atributos
-    private Nodo_PBw inicio;
+    Nodo_PBw inicio;
     private Nodo_PBw termino;
 
     //Constructor sin parametros
@@ -40,15 +40,17 @@ public class PrintBw {
         }
         
     }
+    
+    
 
     //Metodo para comprobar que la cola no esta vacia
     public boolean estaVacia() {
         boolean cola = false;
         if (inicio == null & termino == null) {
             cola = true;
-            System.out.println("La cola esta vacia");
+            
         } else {
-            System.out.println("La cola no esta vacia");
+           
             cola = false;
         }
         return cola;
@@ -64,5 +66,17 @@ public class PrintBw {
         }
         System.out.println("Numero de datos en la cola: " + contador);
         return contador;
+    }
+    
+    public void desencolar(){
+        if (this.inicio!=null) {
+            Nodo_PBw eliminar=this.inicio;
+            this.inicio=this.inicio.getNext();
+            
+            eliminar.next=null;
+            if(this.inicio==null){
+                this.termino=null;
+            }
+        }
     }
 }

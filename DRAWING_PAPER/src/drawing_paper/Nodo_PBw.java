@@ -4,10 +4,14 @@ package drawing_paper;
 public class Nodo_PBw {
 
     private int id_cliente;
-    private Nodo_PBw next;
+    Nodo_PBw next;
 
     public Nodo_PBw(int id_cliente) {
         this.id_cliente = id_cliente;
+        this.next = null;
+    }
+    public Nodo_PBw() {
+        this.id_cliente = 0;
         this.next = null;
     }
 
