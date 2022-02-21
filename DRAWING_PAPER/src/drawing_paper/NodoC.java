@@ -18,7 +18,7 @@ public class NodoC {
         this.nombre_cliente = nombre_cliente;
         this.img_color = img_color;
         this.img_bw = img_bw;
-        this.next= null;
+        this.next = null;
     }
 
     //MÉTODOS GETTER
@@ -71,5 +71,4 @@ public class NodoC {
         this.next = next;
     }
 
-    
 }

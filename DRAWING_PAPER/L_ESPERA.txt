@@ -1,0 +1,11 @@
+digraph G {
+node[ style=filled ,color="#E1E1A8", shape=box];label="ESPERA";
+//agregar nodos
+N883049899[label="ID:3
+ N:Douglas Dominguez
+ COLOR:0
+ BW:3"];
+//enlazar nodos
+{rank=same;
+}
+}

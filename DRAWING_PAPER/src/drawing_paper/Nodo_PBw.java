@@ -10,6 +10,7 @@ public class Nodo_PBw {
         this.id_cliente = id_cliente;
         this.next = null;
     }
+
     public Nodo_PBw() {
         this.id_cliente = 0;
         this.next = null;

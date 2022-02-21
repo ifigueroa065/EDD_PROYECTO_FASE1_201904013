@@ -1,7 +1,6 @@
 package drawing_paper;
 
 //IMPLEMENTANDO LA COLA DE RECEPCIÓN
-
 import static drawing_paper.DRAWING_PAPER.TEMPORAL;
 import static drawing_paper.DRAWING_PAPER.VENTANILLA;
 import static drawing_paper.DRAWING_PAPER.step;
@@ -9,12 +8,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
-
-
 public class Cola {
-    
-    
-    
+
     //Declaración de atributos
     NodoC inicio;
     private NodoC termino;
@@ -29,72 +24,70 @@ public class Cola {
     public void insertar(String Cliente, int id_cliente, String nombre_cliente, int img_color, int img_bw) {
         NodoC nuevoNodo = new NodoC(Cliente, id_cliente, nombre_cliente, img_color, img_bw);
         nuevoNodo.setNext(null);
-        if (inicio == null ) {
+        if (inicio == null) {
             inicio = nuevoNodo;
             termino = nuevoNodo;
-        }else{
+        } else {
             termino.setNext(nuevoNodo);
         }
-        
+
         termino = nuevoNodo;
     }
 
     //Metodo extraer dato
     public void recorrer() {
-        System.out.println("---COLA DE RECEPCIÓN");
+        System.out.println("");
         NodoC aux = this.inicio;
-        while (aux!=null) {            
-            
+        while (aux != null) {
+
             System.out.println("Cliente: " + aux.getCliente());
             System.out.println("ID: " + aux.getId_cliente());
             System.out.println("NOMBRE: " + aux.getNombre_cliente());
             System.out.println("COLOR: " + aux.getImg_color());
             System.out.println("BW: " + aux.getImg_bw());
             System.out.println("----------------------");
-            aux=aux.getNext();
-            if(aux==this.inicio){
+            aux = aux.getNext();
+            if (aux == this.inicio) {
                 break;
             }
         }
-        
+
     }
-    public int  tamanio() {
-        int tam=0;
+
+    public int tamanio() {
+        int tam = 0;
         NodoC aux = this.inicio;
-        while (aux!=null) {            
+        while (aux != null) {
             tam++;
-            
-            aux=aux.getNext();
-            if(aux==this.inicio){
+
+            aux = aux.getNext();
+            if (aux == this.inicio) {
                 break;
             }
         }
-      return tam;
+        return tam;
     }
-    
-    public void desencolar(){
-        if (this.inicio!=null) {
-            NodoC eliminar=this.inicio;
-            this.inicio=this.inicio.getNext();
-            
-            System.out.println("----Estoy eliminando a---");
-            System.out.println("Cliente: " + eliminar.getCliente());
-            System.out.println("ID: " + eliminar.getId_cliente());
-            System.out.println("NOMBRE: " + eliminar.getNombre_cliente());
-            System.out.println("COLOR: " + eliminar.getImg_color());
-            System.out.println("BW: " + eliminar.getImg_bw());
-            
-            System.out.println("----INSERTANDO A LISTA TEMPORAL----");
+
+    public void desencolar() {
+        if (this.inicio != null) {
+            NodoC eliminar = this.inicio;
+            this.inicio = this.inicio.getNext();
+
+            //System.out.println("----Estoy eliminando a---");
+            //System.out.println("Cliente: " + eliminar.getCliente());
+            //System.out.println("ID: " + eliminar.getId_cliente());
+            //System.out.println("NOMBRE: " + eliminar.getNombre_cliente());
+            //System.out.println("COLOR: " + eliminar.getImg_color());
+            //System.out.println("BW: " + eliminar.getImg_bw());
+
+            //System.out.println("----INSERTANDO A LISTA TEMPORAL----");
             TEMPORAL.agregar(eliminar.getId_cliente(), eliminar.getNombre_cliente(), eliminar.getImg_color(), eliminar.getImg_bw());
-            TEMPORAL.recorrer();
-            
+            //TEMPORAL.recorrer();
+
             //VENTANILLA.Atender(eliminar.getId_cliente(),eliminar.getNombre_cliente(), step);
-            
-            
-            
-            eliminar.next=null;
-            if(this.inicio==null){
-                this.termino=null;
+            eliminar.next = null;
+            if (this.inicio == null) {
+                this.termino = null;
             }
         }
     }
@@ -104,9 +97,9 @@ public class Cola {
         boolean cola = false;
         if (inicio == null & termino == null) {
             cola = true;
-            System.out.println("La cola esta vacia");
+            
         } else {
-            System.out.println("La cola no esta vacia");
+            
             cola = false;
         }
         return cola;
@@ -123,20 +116,18 @@ public class Cola {
         System.out.println("Numero de datos en la cola: " + contador);
         return contador;
     }
-    
-    
-    
+
     public void insertar_ORDEN(String Cliente, int id_cliente, String nombre_cliente, int img_color, int img_bw) {
         NodoC nuevoNodo = new NodoC(Cliente, id_cliente, nombre_cliente, img_color, img_bw);
         nuevoNodo.setNext(null);
-        if (inicio == null ) {
+        if (inicio == null) {
             inicio = nuevoNodo;
             termino = nuevoNodo;
-        }else{
+        } else {
             NodoC actualAux = this.inicio;
             NodoC siguienteAux;
-            
-             while (actualAux != null) {
+
+            while (actualAux != null) {
                 siguienteAux = actualAux.next;
                 if (nuevoNodo.getId_cliente() < actualAux.getId_cliente()) {//insertar al inicio de la lista
                     nuevoNodo.next = actualAux;
@@ -147,24 +138,18 @@ public class Cola {
                     break;
                 } else if (nuevoNodo.getId_cliente() < siguienteAux.getId_cliente()) {//insertar en medio de la lista
                     actualAux.next = nuevoNodo;
-                    nuevoNodo.next=siguienteAux;
+                    nuevoNodo.next = siguienteAux;
                     break;
                 }
                 actualAux = actualAux.next;
             }
-            
-            
-            
-            
-        
 
         }
-        
+
         termino = nuevoNodo;
     }
-    
-    
-    public void ORDENAR(){
+
+    public void ORDENAR() {
         //APLICANDO BUBBLE SORT
         NodoC aux_i;
         NodoC aux_j;
@@ -174,13 +159,13 @@ public class Cola {
 
         aux_i = this.inicio;
 
-        System.out.println("---------------ESTOY ORDENANDO LA LISTA -------");
+        
 
         while (aux_i != null) {
             aux_j = aux_i.next;
             while (aux_j != null) {
                 if (aux_i.getId_cliente() > aux_j.getId_cliente()) {
-                    System.out.println("\tcambiar: " + aux_i.getId_cliente() + " y " + aux_j.getId_cliente() + "\n");
+                    //System.out.println("\tcambiar: " + aux_i.getId_cliente() + " y " + aux_j.getId_cliente() + "\n");
 
                     auxValor = aux_i.next;
 
@@ -220,18 +205,25 @@ public class Cola {
             aux_i = aux_i.next;
 
         }
+        
+            System.out.println("");
     }
-    
-    
+
     public String GenerarDTO(String titulo) {
         String result = "digraph G {\n";
+        
+        result +="node[ style=filled ,color=\"#E1E1A8\", shape=box];";
         result += "label=\"" + titulo + "\";\n";
         String conexionesTXT = "";
         String nodosTXT = "";
 
         NodoC actualAux = this.inicio;
         while (actualAux != null) {
-            nodosTXT += "N" + actualAux.hashCode() + "[label=\"" + actualAux.getId_cliente()+ "\"];\n";
+            nodosTXT += "N" + actualAux.hashCode() + "[label=\"" +"ID: " + actualAux.getId_cliente()
+                    +"\n N:" + actualAux.getNombre_cliente() 
+                    +"\n COLOR:" + actualAux.getImg_color()
+                    +"\n BW:" + actualAux.getImg_bw()
+                    + "\"];\n";
 
             if (actualAux.next != null) {
                 conexionesTXT += "N" + actualAux.hashCode() + "->" + "N" + actualAux.next.hashCode() + ";\n";

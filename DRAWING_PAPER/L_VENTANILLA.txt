@@ -1,0 +1,26 @@
+digraph G {
+node[ style=filled ,color="#E1E1A8", shape=box];label="VENTANILLAS";
+//agregar nodos
+N793589513[label="ID:6
+ N:Stefanie Wise
+ COLOR:1
+ BW:1"];
+N1313922862[label="ID:2
+ N:Yang Wiggins
+ COLOR:1
+ BW:1"];
+N495053715[label="ID:4
+ N:Faith Hopkins
+ COLOR:1
+ BW:1"];
+N1922154895[label="ID:5
+ N:Sandy Mason
+ COLOR:1
+ BW:1"];
+//enlazar nodos
+{rank=same;
+N793589513->N1313922862;
+N1313922862->N495053715;
+N495053715->N1922154895;
+}
+}

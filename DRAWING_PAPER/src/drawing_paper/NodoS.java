@@ -1,11 +1,8 @@
-
 package drawing_paper;
 
-
 // CODIGO  UTILIZADO PARA GENERAR LAS VENTANILLAS
-
 public class NodoS {
-    
+
     ///agregando como atributo la pila
     Pila_Img Imagenes;
     private int id;
@@ -14,24 +11,29 @@ public class NodoS {
     private boolean status;
     private int img_Color;
     private int img_Bw;
+
+    private int img_Color_F;
+    private int img_Bw_F;
+
     private int Numero;
-    
+
     NodoS next;
-    
-    public  NodoS(){
-        this.id =0 ;
-        this.nombre_cliente="";
-        this.pasito=0;
-        this.img_Color=0;
-        this.img_Bw=0;
-        this.Numero=0;
-        Imagenes=new Pila_Img();
-        this.status=true;
+
+    public NodoS() {
+        this.id = 0;
+        this.nombre_cliente = "";
+        this.pasito = 0;
+        this.img_Color = 0;
+        this.img_Bw = 0;
+        this.Numero = 0;
+        Imagenes = new Pila_Img();
+        this.status = true;
+        this.img_Color_F = 0;
+        this.img_Bw_F = 0;
         this.next = null;
     }
-    
-    // MÉTODOS GETTER
 
+    // MÉTODOS GETTER
     public int getId() {
         return id;
     }
@@ -52,7 +54,6 @@ public class NodoS {
         return pasito;
     }
 
-
     public int getImg_Color() {
         return img_Color;
     }
@@ -64,17 +65,20 @@ public class NodoS {
     public int getNumero() {
         return Numero;
     }
-        
-    
 
-    
-     public NodoS getNext() {
+    public int getImg_Color_F() {
+        return img_Color_F;
+    }
+
+    public int getImg_Bw_F() {
+        return img_Bw_F;
+    }
+
+    public NodoS getNext() {
         return next;
     }
 
-    
     //MÉTODOS SETTER
-
     public void setId(int id) {
         this.id = id;
     }
@@ -107,16 +111,20 @@ public class NodoS {
         this.Numero = Numero;
     }
 
-    
+    public void setImg_Color_F(int img_Color_F) {
+        this.img_Color_F = img_Color_F;
+    }
 
-    
+    public void setImg_Bw_F(int img_Bw_F) {
+        this.img_Bw_F = img_Bw_F;
+    }
+
     public void setNext(NodoS siguiente) {
         this.next = siguiente;
-    }   
-    
-    public void InitPila(){
-        Imagenes=new Pila_Img();
     }
-    
-    
+
+    public void InitPila() {
+        Imagenes = new Pila_Img();
+    }
+
 }

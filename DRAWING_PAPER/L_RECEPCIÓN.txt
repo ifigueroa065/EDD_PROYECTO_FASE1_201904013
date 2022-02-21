@@ -1,0 +1,26 @@
+digraph G {
+node[ style=filled ,color="#E1E1A8", shape=box];label="RECEPCION";
+//agregar nodos
+N363771819[label="ID: 7
+ N:Leach Ross
+ COLOR:3
+ BW:4"];
+N668386784[label="ID: 8
+ N:Tabatha Pickett
+ COLOR:3
+ BW:2"];
+N1329552164[label="ID: 9
+ N:Tommie Mcpherson
+ COLOR:1
+ BW:1"];
+N189568618[label="ID: 10
+ N:Shannon Johnston
+ COLOR:0
+ BW:0"];
+//enlazar nodos
+{rank=same;
+N363771819->N668386784;
+N668386784->N1329552164;
+N1329552164->N189568618;
+}
+}

@@ -10,7 +10,7 @@ public class Nodo_PColor {
         this.id_cliente = id_cliente;
         this.next = null;
     }
-    
+
     public Nodo_PColor() {
         this.id_cliente = 0;
         this.next = null;
