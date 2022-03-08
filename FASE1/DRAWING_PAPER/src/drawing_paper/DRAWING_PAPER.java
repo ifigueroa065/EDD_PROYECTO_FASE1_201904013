@@ -4,7 +4,7 @@ package drawing_paper;
  *
  * @author ifigueroa065
  */
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
+
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
