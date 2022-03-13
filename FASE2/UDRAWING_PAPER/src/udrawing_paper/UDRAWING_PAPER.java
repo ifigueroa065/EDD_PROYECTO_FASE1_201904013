@@ -14,6 +14,9 @@ public class UDRAWING_PAPER {
         // TODO code application logic here
            System.out.println("Hello");
            System.out.println("AYOLA");
+           
+           INTERFAZ Principal = new INTERFAZ();
+           Principal.setVisible(true);
     }
     
 }
