@@ -7,8 +7,19 @@ package udrawing_paper;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -154,15 +165,206 @@ public class INICIO extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       // ------------------CARGA MASIVA DE CAPAS
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("json", "txt", "xml");
+        fileChooser.setFileFilter(imgFilter);
+
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result != JFileChooser.CANCEL_OPTION) {
+
+            File fileName = fileChooser.getSelectedFile();
+
+            if ((fileName == null) || (fileName.getName().equals(""))) {
+
+                System.out.println("....");
+            } else {
+                //obteniendo ruta del archivo
+                String ruta = fileName.getAbsolutePath();
+                //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO DE CAPAS
+                JSONParser jsonParser = new JSONParser();
+
+                try (FileReader reader = new FileReader(ruta)) {
+
+                    Object obj = jsonParser.parse(reader);
+                    JSONArray clienteslist = (JSONArray) obj;
+                    System.out.println("El archivo contiene el siguiente JSON : ");
+                    //System.out.println(clienteslist);
+
+                    System.out.println("--------------------------------");
+                    for (Object cliente : clienteslist) {
+                        //System.out.println(cliente );
+
+                        JSONObject data = (JSONObject) cliente;
+
+                        System.out.println("ID CAPA" + data.get("id_capa"));
+
+                        JSONArray pix = (JSONArray) data.get("pixeles");
+
+                        for (Object pixel : pix) {
+                            JSONObject chupi = (JSONObject) pixel;
+                            System.out.print("fila : " + chupi.get("fila"));
+                            System.out.print("  columna: " + chupi.get("columna"));
+                            System.out.println("  color: " + chupi.get("color"));
+                            System.out.println("**********");
+                        }
+
+                        System.out.println("--------------------------------");
+
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       
+         // ------------------CARGA MASIVA DE IMÁGENES
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("json", "txt", "xml");
+        fileChooser.setFileFilter(imgFilter);
+
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result != JFileChooser.CANCEL_OPTION) {
+
+            File fileName = fileChooser.getSelectedFile();
+
+            if ((fileName == null) || (fileName.getName().equals(""))) {
+                System.out.println("...");
+            } else {
+                //obteniendo ruta del archivo
+                String ruta = fileName.getAbsolutePath();
+               //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO IMÁGENES
+        JSONParser jsonParser = new JSONParser();
+
+        try (FileReader reader = new FileReader(ruta)) {
+
+            Object obj = jsonParser.parse(reader);
+            JSONArray clienteslist = (JSONArray) obj;
+            System.out.println("El archivo contiene el siguiente JSON : ");
+            //System.out.println(clienteslist);
+
+            System.out.println("--------------------------------");
+            for (Object cliente : clienteslist) {
+                //System.out.println(cliente );
+
+                JSONObject data = (JSONObject) cliente;
+
+                System.out.println("ID : " + data.get("id"));
+                System.out.print("CAPAS : [ ");
+
+                JSONArray pix = (JSONArray) data.get("capas");
+                //System.out.println(pix);
+                for (Object pixel : pix) {
+
+                    System.out.print(pixel + ",");
+
+                }
+                System.out.print("]");
+                System.out.println("");
+                System.out.println("--------------------------------");
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // ------------------CARGA MASIVA DE ÁLBUMS
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+        FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("json", "txt", "xml");
+        fileChooser.setFileFilter(imgFilter);
+
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result != JFileChooser.CANCEL_OPTION) {
+
+            File fileName = fileChooser.getSelectedFile();
+
+            if ((fileName == null) || (fileName.getName().equals(""))) {
+                System.out.println("...");
+            } else {
+                //obteniendo ruta del archivo
+                String ruta = fileName.getAbsolutePath();
+                //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO ALBUMS
+                JSONParser jsonParser = new JSONParser();
+
+                try (FileReader reader = new FileReader(ruta)) {
+
+                    Object obj = jsonParser.parse(reader);
+                    JSONArray clienteslist = (JSONArray) obj;
+                    System.out.println("El archivo contiene el siguiente JSON : ");
+                    //System.out.println(clienteslist);
+
+                    System.out.println("--------------------------------");
+                    for (Object cliente : clienteslist) {
+                        //System.out.println(cliente );
+
+                        JSONObject data = (JSONObject) cliente;
+
+                        System.out.println("NOMBRE : " + data.get("nombre_album"));
+                        System.out.print("IMGS : [ ");
+
+                        JSONArray pix = (JSONArray) data.get("imgs");
+                        //System.out.println(pix);
+                        for (Object pixel : pix) {
+
+                            System.out.print(pixel + ",");
+
+                        }
+                        System.out.print("]");
+                        System.out.println("");
+                        System.out.println("--------------------------------");
+
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

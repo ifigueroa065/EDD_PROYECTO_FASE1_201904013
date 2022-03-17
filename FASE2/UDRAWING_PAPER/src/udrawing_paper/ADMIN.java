@@ -8,10 +8,18 @@ package udrawing_paper;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -165,7 +173,46 @@ public class ADMIN extends javax.swing.JFrame {
                 carga.setText("...");
             } else {
                 //obteniendo ruta del archivo
-                carga.setText(fileName.getAbsolutePath());
+                String ruta = fileName.getAbsolutePath();
+                //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO
+                JSONParser jsonParser = new JSONParser();
+
+                try (FileReader reader = new FileReader(ruta)) {
+
+                    Object obj = jsonParser.parse(reader);
+                    JSONArray clienteslist = (JSONArray) obj;
+                    System.out.println("El archivo contiene el siguiente JSON : ");
+                    //System.out.println(clienteslist);
+
+                    System.out.println("--------------------------------");
+                    for (Object cliente : clienteslist) {
+                        //System.out.println(cliente );
+                        long dpi = 0;
+                        String name = "";
+                        String pass = "";
+                        JSONObject data = (JSONObject) cliente;
+
+                        dpi = Long.parseLong((String) data.get("dpi"));
+                        name = (String) data.get("nombre_cliente");
+                        pass = (String) data.get("password");
+
+                        System.out.println("DPI :" + dpi);
+                        System.out.println("NOMBRE :" + name);
+                        System.out.println("PASSWORD :" + pass);
+                        System.out.println("--------------------------------");
+
+                    }
+                        
+                   JOptionPane.showMessageDialog(null, "CARGA EXITOSA");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                //carga.setText(fileName.getAbsolutePath());
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

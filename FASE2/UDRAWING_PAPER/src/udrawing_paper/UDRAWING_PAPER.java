@@ -1,9 +1,9 @@
-
 package udrawing_paper;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,82 +13,99 @@ import org.json.simple.parser.ParseException;
  * @author Usuario
  */
 public class UDRAWING_PAPER {
-    static String Cl ="";
-    static int dpi=0;
-    static String pass = "";
-    static String name = "";
-   
+
     public static void main(String[] args) {
         // TODO code application logic here
-         
-         //INTERFAZ PRINCIPAL = new INTERFAZ();
-        // PRINCIPAL.setVisible(true);
-        CARGAS();
-        
+
+        INTERFAZ PRINCIPAL = new INTERFAZ();
+        PRINCIPAL.setVisible(true);
+
     }
-    
-    
-     static void CARGAS() {
-        //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO
-        JSONParser parser = new JSONParser();
 
-        try {
-            System.out.println("***************LEYENDO CONTENIDO DEL ARCHIVO***************");
-            Object obj = parser.parse(new FileReader("C_CLIENTES.json"));
-            JSONObject data = (JSONObject) obj;
-            System.out.println("JSON LEIDO: " + data);
+    static void CARGAS() {
+        //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO DE CAPAS
+        JSONParser jsonParser = new JSONParser();
 
-            data.keySet().forEach(keyStr
-                    -> {
-                //ENTENDER FUNCIONAMIENTO DE KEYS
-                //System.out.println("key:" + keyStr);
-                if (((JSONObject) data.get(keyStr)).keySet() != null) {
-                    ((JSONObject) data.get(keyStr)).keySet().forEach(keyStr2
-                            -> {
+        try (FileReader reader = new FileReader("CAPAS.json")) {
 
-                        Cl = (String) keyStr;
-                        Object keyvalue2 = ((JSONObject) data.get(keyStr)).get(keyStr2);
+            Object obj = jsonParser.parse(reader);
+            JSONArray clienteslist = (JSONArray) obj;
+            System.out.println("El archivo contiene el siguiente JSON : ");
+            //System.out.println(clienteslist);
 
-                        if (keyStr2.equals("dpi")) {
-                            dpi = Integer.parseInt((String) keyvalue2);
-                        } else {
-                            if (keyStr2.equals("nombre_cliente")) {
+            System.out.println("--------------------------------");
+            for (Object cliente : clienteslist) {
+                //System.out.println(cliente );
 
-                                name = (String) keyvalue2;
-                            } else {
+                JSONObject data = (JSONObject) cliente;
 
-                                if (keyStr2.equals("password")) {
+                System.out.println("ID CAPA" + data.get("id_capa"));
 
-                                    pass = (String) keyvalue2;
-                                } else {
+                JSONArray pix = (JSONArray) data.get("pixeles");
 
-                                   
-                                }
-                            }
-
-                        }
-                        //ENTENDER FUNCIONAMIENTO DE KEYS
-                        System.out.println("          key:" + keyStr2 + "   value:" + keyvalue2);
-
-                    }
-                    );
+                for (Object pixel : pix) {
+                    JSONObject chupi = (JSONObject) pixel;
+                    System.out.print("fila : " + chupi.get("fila"));
+                    System.out.print("  columna: " + chupi.get("columna"));
+                    System.out.println("  color: " + chupi.get("color"));
+                    System.out.println("**********");
                 }
-                //CLIENTE.insertar(Cl, id, nombre_cliente, img_color, img_bw);
-            });
-           
 
-            System.out.println("%%%%%%%%%%% SUCESSFULLY %%%%%%%%%%% ");
+                System.out.println("--------------------------------");
 
-           
-            
-           
+            }
 
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
         } catch (ParseException e) {
+            e.printStackTrace();
         }
 
     }
+
+    static void CARGAS2() {
+        //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO IMÁGENES
+        JSONParser jsonParser = new JSONParser();
+
+        try (FileReader reader = new FileReader("IMAGENES.json")) {
+
+            Object obj = jsonParser.parse(reader);
+            JSONArray clienteslist = (JSONArray) obj;
+            System.out.println("El archivo contiene el siguiente JSON : ");
+            //System.out.println(clienteslist);
+
+            System.out.println("--------------------------------");
+            for (Object cliente : clienteslist) {
+                //System.out.println(cliente );
+
+                JSONObject data = (JSONObject) cliente;
+
+                System.out.println("ID : " + data.get("id"));
+                System.out.print("CAPAS : [ ");
+
+                JSONArray pix = (JSONArray) data.get("capas");
+                //System.out.println(pix);
+                for (Object pixel : pix) {
+
+                    System.out.print(pixel + ",");
+
+                }
+                System.out.print("]");
+                System.out.println("");
+                System.out.println("--------------------------------");
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
-
-
