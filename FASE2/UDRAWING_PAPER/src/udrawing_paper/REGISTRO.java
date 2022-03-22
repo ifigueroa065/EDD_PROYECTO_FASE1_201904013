@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package udrawing_paper;
 
 import java.awt.Graphics;
@@ -13,7 +9,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Usuario
+ * @author ifigueroa065
  */
 public class REGISTRO extends javax.swing.JFrame {
 
