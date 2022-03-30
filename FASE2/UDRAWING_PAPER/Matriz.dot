@@ -1,0 +1,124 @@
+digraph G{
+node [shape = box]
+raiz[label="Matriz"  group=1];
+1442407170 [label="/" group = 1];
+1028566121 [label="cache" group = 1];
+1118140819 [label="credentials" group = 1];
+1975012498 [label="documents" group = 1];
+1808253012 [label="folder" group = 1];
+589431969 [label="home" group = 1];
+1252169911 [label="oracle" group = 1];
+2101973421 [label="temp" group = 1];
+685325104 [label="usac" group = 1];
+460141958 [label="user" group = 1];
+1163157884 [label="var" group = 1];
+1956725890 [label="videos" group = 1];
+1442407170->1028566121[dir=normal];
+1028566121->1118140819[dir=normal];
+1118140819->1975012498[dir=normal];
+1975012498->1808253012[dir=normal];
+1808253012->589431969[dir=normal];
+589431969->1252169911[dir=normal];
+1252169911->2101973421[dir=normal];
+2101973421->685325104[dir=normal];
+685325104->460141958[dir=normal];
+460141958->1163157884[dir=normal];
+1163157884->1956725890[dir=normal];
+356573597 [label="/" group = 49];
+1735600054 [label="cache" group = 502];
+21685669 [label="credentials" group = 1168];
+2133927002 [label="documents" group = 980];
+1836019240 [label="folder" group = 638];
+325040804 [label="nuevaCarpeta" group = 1249];
+1173230247 [label="oracle" group = 632];
+856419764 [label="temp" group = 440];
+621009875 [label="usac" group = 430];
+1265094477 [label="user" group = 449];
+2125039532 [label="var" group = 331];
+312714112 [label="videos" group = 652];
+356573597->1735600054[dir=normal];
+1735600054->21685669[dir=normal];
+21685669->2133927002[dir=normal];
+2133927002->1836019240[dir=normal];
+1836019240->325040804[dir=normal];
+325040804->1173230247[dir=normal];
+1173230247->856419764[dir=normal];
+856419764->621009875[dir=normal];
+621009875->1265094477[dir=normal];
+1265094477->2125039532[dir=normal];
+2125039532->312714112[dir=normal];
+raiz ->1442407170
+raiz ->356573597
+{ rank  = same; raiz 
+356573597;
+1735600054;
+21685669;
+2133927002;
+1836019240;
+325040804;
+1173230247;
+856419764;
+621009875;
+1265094477;
+2125039532;
+312714112;
+}
+692404036 [style=invis,fillcolor=seashell2,label= "///" group = 49 ];1554874502 [style=filled,fillcolor=seashell2,label= "temp/cache" group = 502 ];
+1846274136 [style=filled,fillcolor=seashell2,label= "user/credentials" group = 1168 ];
+1639705018 [style=filled,fillcolor=seashell2,label= "home/documents" group = 980 ];
+1627674070 [style=filled,fillcolor=seashell2,label= "user/folder" group = 638 ];
+1360875712 [style=filled,fillcolor=seashell2,label= "//home" group = 1249 ];
+1625635731 [style=filled,fillcolor=seashell2,label= "var/oracle" group = 632 ];
+1580066828 [style=filled,fillcolor=seashell2,label= "//temp" group = 440 ];
+491044090 [style=filled,fillcolor=seashell2,label= "documents/usac" group = 430 ];
+644117698 [style=filled,fillcolor=seashell2,label= "//user" group = 449 ];
+1872034366 [style=filled,fillcolor=seashell2,label= "//var" group = 331 ];
+1581781576 [style=filled,fillcolor=seashell2,label= "nuevaCarpeta/videos" group = 652 ];
+1442407170->692404036[style= invis];
+1360875712->1580066828[dir=both];
+1580066828->644117698[dir=both];
+644117698->1872034366[dir=both];
+{ rank = same; 1442407170;
+692404036;
+1360875712;
+1580066828;
+644117698;
+1872034366;
+}
+1975012498->491044090[dir=both];
+{ rank = same; 1975012498;
+491044090;
+}
+589431969->1639705018[dir=both];
+1639705018->1581781576[dir=both];
+{ rank = same; 589431969;
+1639705018;
+1581781576;
+}
+2101973421->1554874502[dir=both];
+{ rank = same; 2101973421;
+1554874502;
+}
+460141958->1846274136[dir=both];
+1846274136->1627674070[dir=both];
+{ rank = same; 460141958;
+1846274136;
+1627674070;
+}
+1163157884->1625635731[dir=both];
+{ rank = same; 1163157884;
+1625635731;
+}
+356573597->692404036[style= invis];
+1735600054->1554874502[dir=both];
+21685669->1846274136[dir=both];
+2133927002->1639705018[dir=both];
+1836019240->1627674070[dir=both];
+325040804->1360875712[dir=both];
+1173230247->1625635731[dir=both];
+856419764->1580066828[dir=both];
+621009875->491044090[dir=both];
+1265094477->644117698[dir=both];
+2125039532->1872034366[dir=both];
+312714112->1581781576[dir=both];
+}

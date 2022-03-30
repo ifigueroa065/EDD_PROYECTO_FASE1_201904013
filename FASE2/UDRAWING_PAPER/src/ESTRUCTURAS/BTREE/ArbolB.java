@@ -7,7 +7,7 @@ package ESTRUCTURAS;
  */
 public class ArbolB {
     int orden_arbol = 5;
-    RamaB raiz;
+    public RamaB raiz;
 
     public ArbolB() {
         this.raiz = null;
@@ -18,12 +18,14 @@ public class ArbolB {
         if (raiz == null) {
             raiz = new RamaB();
             raiz.insertar(nodo);
+            System.out.println("se insertó -> "+ nodo.id); // INGRESANDO RAMA
         } else {
             NodoB obj = insertar_en_rama(nodo, raiz);
             if (obj != null) {
                 //si devuelve algo el metodo de insertar en rama quiere decir que creo una nueva rama, y se debe insertar en el arbol
                 raiz = new RamaB();
                 raiz.insertar(obj);
+                
                 raiz.hoja = false;
             }
         }
@@ -32,6 +34,7 @@ public class ArbolB {
     private NodoB insertar_en_rama(NodoB nodo, RamaB rama) {
         if (rama.hoja) {
             rama.insertar(nodo);
+            System.out.println("se insertó -> "+ nodo.id); //INGRESANDO NODOS
             if (rama.contador == orden_arbol) {
                 //si ya se insertaron todos los elementos posibles se debe dividir la rama
                 return dividir(rama);
@@ -47,6 +50,7 @@ public class ArbolB {
                     NodoB obj = insertar_en_rama(nodo, temp.izquierda);
                     if (obj instanceof NodoB) {
                         rama.insertar((NodoB) obj);
+                        
                         if (rama.contador == orden_arbol) {
                             return dividir(rama);
                         }
@@ -62,10 +66,14 @@ public class ArbolB {
                     }
                     return null;
                 }
+                
                 temp = (NodoB) temp.siguiente;
+                
             } while (temp != null);
+            
         }
         return null;
+        
     }
 
     private NodoB dividir(RamaB rama) {
@@ -114,4 +122,26 @@ public class ArbolB {
         Nuevito.izquierda = rizquierda;
         return Nuevito;
     }
+    
+    public void INORDER(){
+        //Recorrer_A();
+    }
+    
+    public void Recorrer_A(NodoB nodo){
+        
+        if(nodo==null){
+            return;
+        }
+         System.out.println(nodo.id +",");
+            Recorrer_A(nodo.anterior);
+            Recorrer_A(nodo.siguiente);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }

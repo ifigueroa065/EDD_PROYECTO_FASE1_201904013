@@ -7,7 +7,7 @@ package ESTRUCTURAS;
  */
 public class NodoB {
     //Valores
-    int id;
+     int id;
     //Apuntadores
     NodoB siguiente;
     NodoB anterior;

@@ -1,5 +1,5 @@
 
-package ESTRUCTURAS;
+package ESTRUCTURAS.DOBLE;
 
 /**
  *

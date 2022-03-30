@@ -5,6 +5,7 @@ package ESTRUCTURAS;
  *
  * @author ifigueroa065
  */
+
 public class RamaB {
     boolean hoja;//identificar si es una hoja
     int contador;//identificar la cantidad de elementos que tiene la rama
