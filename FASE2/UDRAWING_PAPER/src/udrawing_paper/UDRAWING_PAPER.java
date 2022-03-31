@@ -136,6 +136,7 @@ public class UDRAWING_PAPER {
     }
 
     static void CARGAS() {
+        
         //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO DE CAPAS
         JSONParser jsonParser = new JSONParser();
 
@@ -179,6 +180,7 @@ public class UDRAWING_PAPER {
     }
 
     static void CARGAS2() {
+        
         //MÉTODO PARA REALIZAR LA CARGA DEL ARCHIVO IMÁGENES
         JSONParser jsonParser = new JSONParser();
 
